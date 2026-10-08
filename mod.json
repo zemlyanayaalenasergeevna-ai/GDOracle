@@ -1,0 +1,14 @@
+{
+  "geode": "5.10.1",
+  "gd": {
+    "android": "2.2081",
+    "win": "2.2081",
+    "mac": "2.2081",
+    "ios": "2.2081"
+  },
+  "id": "alena.gdoracle",
+  "name": "GD Oracle",
+  "version": "0.1.0",
+  "developer": "Alena",
+  "description": "Predictive gameplay HUD that scans upcoming Geometry Dash objects and estimates danger."
+}
