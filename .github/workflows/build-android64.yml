@@ -1,0 +1,34 @@
+name: Build GD Oracle - Android64
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    tags: ["v*"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build GD Oracle
+        uses: geode-sdk/build-geode-mod@main
+        with:
+          target: Android64
+          build-config: Release
+
+      - name: Locate .geode
+        shell: bash
+        run: |
+          set -e
+          FILE=$(find build out -type f -name '*.geode' 2>/dev/null | head -n 1 || true)
+          test -n "$FILE" || { echo "No .geode file found."; exit 1; }
+          mkdir -p artifacts
+          cp "$FILE" artifacts/alena.gdoracle.geode
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: alena.gdoracle-android64
+          path: artifacts/alena.gdoracle.geode
+          if-no-files-found: error
